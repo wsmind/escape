@@ -51,7 +51,7 @@
                 // sample the texture
                 fixed3 light = tex2D(_LightWorldTexture, i.uv).rgb;
                 fixed3 dark = tex2D(_DarkWorldTexture, i.uv).rgb;
-                float mask = smoothstep(0.1, 0.9, i.uv.y + sin(i.uv.x * 10.0) * 0.2 - 0.1);
+                float mask = smoothstep(0.4, 0.6, i.uv.y + sin(i.uv.x * 10.0 + _Time.y) * 0.2 - 0.1);
 
                 float maskGate = snoise(float3(i.uv * float2(1.6, 0.9) * 40.0, _Time.x * 4.0)) * 0.5 + 0.5;
                 maskGate *= maskGate;
