@@ -51,17 +51,19 @@
                 // sample the texture
                 fixed3 light = tex2D(_LightWorldTexture, i.uv).rgb;
                 fixed3 dark = tex2D(_DarkWorldTexture, i.uv).rgb;
-                float mask = smoothstep(0.4, 0.6, i.uv.y + sin(i.uv.x * 10.0 + _Time.y) * 0.2 - 0.1);
+                //float mask = smoothstep(0.4, 0.6, i.uv.y + sin(i.uv.x * 10.0 + _Time.y) * 0.2 - 0.1);
+                float mask = 1.0 - smoothstep(0.4, 0.9, length(i.uv * 2.0 - 1.0));
 
                 float maskGate = snoise(float3(i.uv * float2(1.6, 0.9) * 40.0, _Time.x * 4.0)) * 0.5 + 0.5;
                 maskGate *= maskGate;
 
-                float smooth = 0.2;
+                float smooth = 0.1;
                 float2 gateRange = saturate(float2(maskGate - smooth, maskGate + smooth));
 
                 float interpolator = smoothstep(gateRange.x, gateRange.y, mask);
 
                 fixed3 color = lerp(light, dark, interpolator);
+                //fixed3 color = mask.xxx;
 
                 return fixed4(color, 1.0);
             }
