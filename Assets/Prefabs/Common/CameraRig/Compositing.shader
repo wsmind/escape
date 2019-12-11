@@ -68,6 +68,10 @@
                 float interpolator = smoothstep(gateRange.x, gateRange.y, mask);
 
                 fixed3 color = lerp(light, dark, interpolator);
+                fixed3 borderColor = fixed3(1.0, 0.4, 0.0);
+
+                float borderMask = smoothstep(0.0, 0.2, interpolator) * smoothstep(1.0, 0.8, interpolator);
+                color = saturate(color + borderColor * borderMask);
                 //fixed3 color = mask.xxx;
 
                 return fixed4(color, 1.0);
