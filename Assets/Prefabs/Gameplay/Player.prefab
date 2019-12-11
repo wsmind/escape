@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2708848167533573975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4658481695667829968}
   - {fileID: 3609568388336648280}
@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a331ba3e7db2c034795c6ce5b1ba6347, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a919823266808be42b9a29951e00e5a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.94, y: 11.23}
+  m_Size: {x: 1.81, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -101,14 +101,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.94, y: 11.23}
-    newSize: {x: 7.94, y: 11.23}
+    oldSize: {x: 1.81, y: 2.56}
+    newSize: {x: 1.81, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.94, y: 11.23}
+  m_Size: {x: 1.6, y: 2.49}
   m_EdgeRadius: 0
 --- !u!50 &527894082949549665
 Rigidbody2D:
@@ -173,7 +173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5444427748006103244}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -3.46, z: 2.27}
+  m_LocalPosition: {x: 0.037, y: -0.918, z: 2.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4806231365458899286}
@@ -814,7 +814,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.74, y: 0.2, z: 0.47}
+    m_Scale: {x: 1.00479, y: 0.2, z: 0.47}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -4880,7 +4880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8671053585811623875}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.88, z: 0}
+  m_LocalPosition: {x: 0, y: -1.308, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4806231365458899286}
@@ -4910,7 +4910,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.76, y: 0.25}
+  m_Size: {x: 1.5, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &7913264272931999531
 MonoBehaviour:
