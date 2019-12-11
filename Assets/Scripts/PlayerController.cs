@@ -42,7 +42,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // flip with direction
-        FrameContainer.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
+        if (Mathf.Abs(rigidBody.velocity.x) > 0.2)
+            FrameContainer.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
     }
 
     private void FixedUpdate()
