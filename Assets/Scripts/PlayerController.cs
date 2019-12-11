@@ -7,14 +7,42 @@ public class PlayerController : MonoBehaviour
     public float MaxSpeed = 10.0f;
     public float InputSensitivity = 80.0f;
     public float JumpVelocity = 12.0f;
+    public float AnimationSpeed = 0.01f;
     private Rigidbody2D rigidBody;
-    public FeetCollider feetCollider;
+    public FeetCollider FeetCollider;
+
+    public Transform FrameContainer;
 
     private bool jumping = false;
+
+    private float animationTime = 0;
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        // update animation when walking
+        if (FeetCollider.Grounded)
+        {
+            float animationDelta = Mathf.Abs(rigidBody.velocity.x) * AnimationSpeed;
+            float newAnimationTime = (animationTime + animationDelta) % (float)FrameContainer.childCount;
+
+            int currentFrame = (int)animationTime;
+            int nextFrame = (int)newAnimationTime;
+            if (currentFrame != nextFrame)
+            {
+                FrameContainer.GetChild(currentFrame).gameObject.SetActive(false);
+                FrameContainer.GetChild(nextFrame).gameObject.SetActive(true);
+            }
+
+            animationTime = newAnimationTime;
+        }
+
+        // flip with direction
+        FrameContainer.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
     }
 
     private void FixedUpdate()
@@ -31,7 +59,7 @@ public class PlayerController : MonoBehaviour
         velocity.x = Mathf.Lerp(velocity.x, targetSpeed, Mathf.Min(Time.deltaTime * InputSensitivity, 1.0f));
 
         var jumpPressed = Input.GetButton("Jump");
-        if (jumpPressed && !jumping && feetCollider.Grounded)
+        if (jumpPressed && !jumping && FeetCollider.Grounded)
         {
             jumping = true;
             velocity.y = JumpVelocity;
