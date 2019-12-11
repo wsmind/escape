@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MaxSpeed = 4.0f;
+    public float MaxSpeed = 10.0f;
 
     private Rigidbody2D rigidBody;
 
@@ -15,12 +15,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Vector2 velocity = rigidBody.velocity;
+
         var horizontal = Input.GetAxis("Horizontal");
 
         // dead zone
         if (Mathf.Abs(horizontal) < 0.1f)
             horizontal = 0.0f;
 
-        rigidBody.velocity = new Vector2(horizontal * MaxSpeed, rigidBody.velocity.y);
+        velocity.x = horizontal * MaxSpeed;
+
+        var jumpPressed = Input.GetButtonDown("Jump");
+        if (jumpPressed)
+            velocity.y = 5.0f;
+
+        rigidBody.velocity = velocity;
     }
 }
