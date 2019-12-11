@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public PlayerController player;
+    public float DampingFactor = 10.0f;
 
     private void Awake()
     {
@@ -12,7 +13,7 @@ public class CameraController : MonoBehaviour
             Debug.LogError("You need to attach the player to the camera rig!");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (player == null)
         {
@@ -22,6 +23,7 @@ public class CameraController : MonoBehaviour
 
         var playerPosition = player.gameObject.transform.position;
 
-        transform.position = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
+        var targetPosition = new Vector3(playerPosition.x, playerPosition.y, 0.0f);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Mathf.Min(Time.deltaTime * DampingFactor, 1.0f));
     }
 }
