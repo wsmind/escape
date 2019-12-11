@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     public float InputSensitivity = 80.0f;
     public float JumpVelocity = 12.0f;
     private Rigidbody2D rigidBody;
-
     public FeetCollider feetCollider;
+
     private bool jumping = false;
 
     private void Awake()
