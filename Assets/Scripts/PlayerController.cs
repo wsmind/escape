@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float MaxSpeed = 10.0f;
+    public float InputSensitivity = 80.0f;
+    public float JumpVelocity = 12.0f;
 
     private Rigidbody2D rigidBody;
 
@@ -23,11 +25,12 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(horizontal) < 0.1f)
             horizontal = 0.0f;
 
-        velocity.x = horizontal * MaxSpeed;
+        float targetSpeed = horizontal * MaxSpeed;
+        velocity.x = Mathf.Lerp(velocity.x, targetSpeed, Mathf.Min(Time.deltaTime * InputSensitivity, 1.0f));
 
         var jumpPressed = Input.GetButtonDown("Jump");
         if (jumpPressed)
-            velocity.y = 5.0f;
+            velocity.y = JumpVelocity;
 
         rigidBody.velocity = velocity;
     }
