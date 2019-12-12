@@ -42,8 +42,16 @@ public class Level : MonoBehaviour
     private void Update()
     {
         var targetDarkness = isDark ? 1.0f : 0.0f;
-        globalDarkness = Mathf.Lerp(globalDarkness, targetDarkness, Mathf.Min(5.0f * Time.deltaTime, 1.0f));
-        Shader.SetGlobalFloat("GlobalDarkness", globalDarkness);
+        globalDarkness = Mathf.Lerp(globalDarkness, targetDarkness, Mathf.Min(1.2f * Time.deltaTime, 1.0f));
+
+        //const float power = 4.0f;
+        float shaderDarkness = globalDarkness;// * globalDarkness;
+        /*if (isDark)
+            shaderDarkness = Mathf.Pow(shaderDarkness, power);
+        else
+            shaderDarkness = Mathf.Pow(shaderDarkness, 1.0f / power);*/
+
+        Shader.SetGlobalFloat("GlobalDarkness", shaderDarkness);
     }
 
     private void OnPortalTriggered()
