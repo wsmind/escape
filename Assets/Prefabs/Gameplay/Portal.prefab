@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivationFeedback: {fileID: 3642686790585522223}
-  FeedbackSpeed: 2
+  FeedbackSpeed: 1
 --- !u!61 &7159932286583005150
 BoxCollider2D:
   m_ObjectHideFlags: 0
