@@ -20,6 +20,8 @@
             #include "UnityCG.cginc"
             #include "SimplexNoise3D.cginc"
 
+            uniform float4 CameraScaleBias;
+
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -52,14 +54,17 @@
 
             fixed4 frag(v2f i) : SV_Target
             {
+                float2 worldUv = i.uv * CameraScaleBias.xy + CameraScaleBias.zw;
+
                 // sample the textures
                 fixed3 light = tex2D(_LightWorldTexture, i.uv).rgb;
                 fixed3 dark = tex2D(_DarkWorldTexture, i.uv).rgb;
                 fixed3 mask = tex2D(_MaskTexture, i.uv).rgb;
-                //float mask = smoothstep(0.4, 0.6, i.uv.y + sin(i.uv.x * 10.0 + _Time.y) * 0.2 - 0.1);
+                //float mask = sin(_Time.y) * 0.5 + 0.5;
+                //float mask = smoothstep(0.4, 0.6, worldUv.y * 0.1 + sin(worldUv.x * 0.4 + _Time.y) * 0.2 + 0.4);
                 //float mask = 1.0 - smoothstep(0.4, 0.9, length(i.uv * 2.0 - 1.0));
 
-                float maskGate = snoise(float3(i.uv * float2(1.6, 0.9) * 10.0, _Time.x * 4.0)) * 0.5 + 0.5;
+                float maskGate = snoise(float3(worldUv * 1.2, _Time.x * 4.0)) * 0.5 + 0.5;
                 maskGate *= maskGate;
 
                 float smooth = 0.1;
@@ -72,7 +77,6 @@
 
                 float borderMask = smoothstep(0.0, 0.2, interpolator) * smoothstep(1.0, 0.8, interpolator);
                 color = saturate(color + borderColor * borderMask);
-                //fixed3 color = mask.xxx;
 
                 return fixed4(color, 1.0);
             }

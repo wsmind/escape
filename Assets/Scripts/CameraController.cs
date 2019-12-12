@@ -41,4 +41,22 @@ public class CameraController : MonoBehaviour
 
         cameraContainer.position = new Vector3(smoothPosition.x, smoothPosition.y, -Distance);
     }
+
+    private void Update()
+    {
+        // compute the screen size at z = 0
+        var projectedHalfScreen = new Vector2(Mathf.Tan(fovX * 0.5f), Mathf.Tan(fovY * 0.5f)) * Distance;
+
+        // screen bounds in world space
+        var screenCenter = new Vector2(cameraContainer.position.x, cameraContainer.position.y);
+        var screenMin = screenCenter - projectedHalfScreen;
+        var screenMax = screenCenter + projectedHalfScreen;
+
+        // convert to scale/bias
+        var scale = screenMax - screenMin;
+        var bias = screenMin;
+
+        var cameraOffset = new Vector4(scale.x, scale.y, bias.x, bias.y);
+        Shader.SetGlobalVector("CameraScaleBias", cameraOffset);
+    }
 }
