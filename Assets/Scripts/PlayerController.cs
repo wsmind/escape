@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
 
     private ActivationZone currentAnimationZone;
 
+    public void SwitchLayer(int layer)
+    {
+        gameObject.layer = layer;
+    }
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();

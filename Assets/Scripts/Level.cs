@@ -57,5 +57,6 @@ public class Level : MonoBehaviour
     private void OnPortalTriggered()
     {
         isDark = !isDark;
+        player.SwitchLayer(isDark ? 9 : 8);
     }
 }
