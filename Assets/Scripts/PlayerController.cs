@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private float animationTime = 0;
 
+    private ActivationZone currentAnimationZone;
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -44,6 +46,10 @@ public class PlayerController : MonoBehaviour
         // flip with direction
         if (Mathf.Abs(rigidBody.velocity.x) > 0.2)
             FrameContainer.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
+
+        var activatePressed = Input.GetButtonDown("Activate");
+        if (currentAnimationZone && activatePressed)
+            currentAnimationZone.Activate();
     }
 
     private void FixedUpdate()
@@ -71,5 +77,25 @@ public class PlayerController : MonoBehaviour
         }
 
         rigidBody.velocity = velocity;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var activationZone = other.GetComponent<ActivationZone>();
+        if (activationZone && !currentAnimationZone)
+        {
+            currentAnimationZone = activationZone;
+            activationZone.Show();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var activationZone = other.GetComponent<ActivationZone>();
+        if (activationZone && (activationZone == currentAnimationZone))
+        {
+            activationZone.Hide();
+            currentAnimationZone = null;
+        }
     }
 }
