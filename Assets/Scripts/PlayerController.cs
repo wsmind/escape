@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
 
     public Transform FrameContainer;
 
+    public AudioSource walkAudio;
+    public AudioSource jumpAudio;
+
     public Vector2 PointOfInterest { get; private set; }
 
     private bool jumping = false;
@@ -40,6 +43,8 @@ public class PlayerController : MonoBehaviour
             {
                 FrameContainer.GetChild(currentFrame).gameObject.SetActive(false);
                 FrameContainer.GetChild(nextFrame).gameObject.SetActive(true);
+                walkAudio.pitch = Random.value * 0.3f + 4.0f;
+                walkAudio.Play();
             }
 
             animationTime = newAnimationTime;
@@ -77,6 +82,8 @@ public class PlayerController : MonoBehaviour
         {
             jumping = true;
             velocity.y = JumpVelocity;
+            jumpAudio.pitch = Random.value * 0.2f + 1.5f;
+            jumpAudio.Play();
         }
         else if (!jumpPressed)
         {
