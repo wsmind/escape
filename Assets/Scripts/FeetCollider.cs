@@ -6,6 +6,11 @@ public class FeetCollider : MonoBehaviour
 
     private int collisionCount = 0;
 
+    public void SwitchLayer(int layer)
+    {
+        gameObject.layer = layer;
+    }
+
     private void Awake()
     {
         Grounded = false;

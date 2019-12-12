@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public void SwitchLayer(int layer)
     {
         gameObject.layer = layer;
+        FeetCollider.SwitchLayer(layer);
     }
 
     private void Awake()
