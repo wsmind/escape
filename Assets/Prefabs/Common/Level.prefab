@@ -238,6 +238,7 @@ MonoBehaviour:
     width: 32
     height: 18
   DampingFactor: 10
+  Distance: 40
   cameraContainer: {fileID: 1528443896167500720}
 --- !u!81 &2708638688944889552
 AudioListener:

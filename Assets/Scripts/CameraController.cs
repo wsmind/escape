@@ -8,14 +8,37 @@ public class CameraController : MonoBehaviour
 
     public float DampingFactor = 10.0f;
 
-    public float Distance = 36.0f;
+    public float Distance = 64.0f;
 
     public Transform cameraContainer;
 
+    private static readonly float fovY = Mathf.Deg2Rad * 20.0f;
+    private static readonly float fovX = 16.0f / 9.0f * fovY;
+
     private void FixedUpdate()
     {
-        var position = Vector2.Lerp(new Vector2(cameraContainer.position.x, cameraContainer.position.y), TargetPosition, Mathf.Min(Time.deltaTime * DampingFactor, 1.0f));
+        var target = TargetPosition;
 
-        cameraContainer.position = new Vector3(position.x, position.y, -Distance);
+        // compute the screen size at z = 0
+        var projectedHalfScreen = new Vector2(Mathf.Tan(fovX * 0.5f), Mathf.Tan(fovY * 0.5f)) * Distance;
+
+        // pad the level bounds to get a safe target area
+        var minPosition = LevelBounds.min + projectedHalfScreen;
+        var maxPosition = LevelBounds.max - projectedHalfScreen;
+
+        // if max - min is negative, it means the level is smaller than the screen area
+        // center it in this case
+        var negativeOffset = Vector2.Min(maxPosition - minPosition, new Vector2(0.0f, 0.0f));
+        minPosition += negativeOffset * 0.5f;
+        maxPosition -= negativeOffset * 0.5f;
+
+        // clamp the target to the safe area
+        target = Vector2.Max(target, minPosition);
+        target = Vector2.Min(target, maxPosition);
+
+        // smooth the movement over time
+        var smoothPosition = Vector2.Lerp(new Vector2(cameraContainer.position.x, cameraContainer.position.y), target, Mathf.Min(Time.deltaTime * DampingFactor, 1.0f));
+
+        cameraContainer.position = new Vector3(smoothPosition.x, smoothPosition.y, -Distance);
     }
 }
