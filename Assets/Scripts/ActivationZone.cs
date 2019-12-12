@@ -6,7 +6,7 @@ public class ActivationZone : MonoBehaviour
     public event OnActivatedHandler OnActivated;
 
     public SpriteRenderer ActivationFeedback;
-    public float FeedbackSpeed = 2.0f;
+    public float FeedbackSpeed = 4.0f;
 
     private bool feedbackVisible = false;
     private float feedbackOpacity = 0.0f;
