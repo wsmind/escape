@@ -67,8 +67,8 @@
 
                 mask = lerp(mask, 1.0 - mask, GlobalDarkness);
 
-                float maskGate = snoise(float3(worldUv * 1.2, _Time.x * 4.0)) * 0.5 + 0.5;
-                maskGate *= maskGate;
+                float maskGate = snoise(float3(worldUv * 1.4, _Time.x * 4.0)) * 0.5 + 0.5;
+                //maskGate *= maskGate;
 
                 float smooth = 0.1;
                 float2 gateRange = saturate(float2(maskGate - smooth, maskGate + smooth));
@@ -76,6 +76,7 @@
                 float interpolator = smoothstep(gateRange.x, gateRange.y, mask);
 
                 fixed3 color = lerp(light, dark, interpolator);
+                //fixed3 borderColor = lerp(fixed3(1.0, 0.4, 0.0), fixed3(0.1, 0.4, 0.6), GlobalDarkness);
                 fixed3 borderColor = fixed3(1.0, 0.4, 0.0);
 
                 float borderMask = smoothstep(0.0, 0.2, interpolator) * smoothstep(1.0, 0.8, interpolator);
