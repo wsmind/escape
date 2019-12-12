@@ -21,6 +21,7 @@
             #include "SimplexNoise3D.cginc"
 
             uniform float4 CameraScaleBias;
+            uniform float GlobalDarkness;
 
             struct appdata
             {
@@ -63,6 +64,8 @@
                 //float mask = sin(_Time.y) * 0.5 + 0.5;
                 //float mask = smoothstep(0.4, 0.6, worldUv.y * 0.1 + sin(worldUv.x * 0.4 + _Time.y) * 0.2 + 0.4);
                 //float mask = 1.0 - smoothstep(0.4, 0.9, length(i.uv * 2.0 - 1.0));
+
+                mask = lerp(mask, 1.0 - mask, GlobalDarkness);
 
                 float maskGate = snoise(float3(worldUv * 1.2, _Time.x * 4.0)) * 0.5 + 0.5;
                 maskGate *= maskGate;
