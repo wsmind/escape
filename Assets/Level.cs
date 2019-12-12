@@ -28,6 +28,6 @@ public class Level : MonoBehaviour
         }
 
         var playerPosition = player.gameObject.transform.position;
-        cameraController.TargetPosition = playerPosition;
+        cameraController.TargetPosition = new Vector2(playerPosition.x, playerPosition.y) + player.PointOfInterest;
     }
 }

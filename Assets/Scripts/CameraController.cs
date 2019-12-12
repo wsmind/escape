@@ -2,7 +2,7 @@
 
 public class CameraController : MonoBehaviour
 {
-    public Vector3 TargetPosition;
+    public Vector2 TargetPosition;
 
     public Rect LevelBounds = new Rect(-16, 0, 32, 18);
 

@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform FrameContainer;
 
+    public Vector2 PointOfInterest { get; private set; }
+
     private bool jumping = false;
 
     private float animationTime = 0;
@@ -47,6 +49,11 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(rigidBody.velocity.x) > 0.2)
             FrameContainer.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
 
+        // damped point of interested (for camera targeting)
+        var targetPoi = new Vector2(FrameContainer.localScale.x * 6.0f + 0.5f, 1.5f);
+        PointOfInterest = Vector2.Lerp(PointOfInterest, targetPoi, Mathf.Min(Time.deltaTime * 0.5f, 1.0f));
+
+        // activations
         var activatePressed = Input.GetButtonDown("Activate");
         if (currentAnimationZone && activatePressed)
             currentAnimationZone.Activate();
