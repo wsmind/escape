@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MarineTests.unity
-    guid: 5300514e5931143cbbaa881d215f8e55
+    path: Assets/Levels/Tutorial.unity
+    guid: 4faffdd7c2bb42641a01d4ab4cd7fb01
   m_configObjects: {}
