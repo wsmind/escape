@@ -4,6 +4,8 @@ public class Portal : MonoBehaviour
 {
     public ActivationZone Activator;
 
+    public ParticleSystem BurstFx;
+
     public delegate void OnPortalTriggeredHandler();
     public event OnPortalTriggeredHandler OnPortalTriggered;
 
@@ -19,7 +21,7 @@ public class Portal : MonoBehaviour
 
     private void OnActivated()
     {
-        Debug.Log("portal activated");
+        BurstFx.Play();
         OnPortalTriggered?.Invoke();
     }
 }
