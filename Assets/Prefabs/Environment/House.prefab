@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4976960701618001597}
   - component: {fileID: 8702657922810537659}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: House_dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
