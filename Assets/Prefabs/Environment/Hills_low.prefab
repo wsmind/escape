@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8606692038567891521}
   - component: {fileID: 8606692038567891520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hills_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
