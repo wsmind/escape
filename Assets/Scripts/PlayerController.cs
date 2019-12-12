@@ -101,6 +101,19 @@ public class PlayerController : MonoBehaviour
             currentAnimationZone = activationZone;
             activationZone.Show();
         }
+
+        var bumper = other.GetComponent<Bumper>();
+        if (bumper != null)
+        {
+            jumping = true;
+
+            Vector2 velocity = rigidBody.velocity;
+            velocity.y = bumper.BumpVelocity;
+            rigidBody.velocity = velocity;
+
+            jumpAudio.pitch = Random.value * 0.2f + 0.8f;
+            jumpAudio.Play();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
