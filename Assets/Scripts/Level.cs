@@ -8,6 +8,8 @@ public class Level : MonoBehaviour
 
     private CameraController cameraController;
 
+    private Rocket rocket;
+
     private bool isDark = false;
     private float globalDarkness = 0.0f;
 
@@ -19,12 +21,20 @@ public class Level : MonoBehaviour
         if (player == null)
             Debug.LogError("No player found in this level!");
 
+        rocket = GameObject.FindWithTag("Rocket")?.GetComponent<Rocket>();
+
+        if (rocket == null)
+            Debug.LogError("No rocket found in this level!");
+
         cameraController.LevelBounds = Bounds;
 
         foreach (var portal in GameObject.FindGameObjectsWithTag("Portal"))
         {
             portal.GetComponent<Portal>().OnPortalTriggered += OnPortalTriggered;
         }
+
+        if (rocket)
+            rocket.OnRocketTriggered += OnRocketTriggered;
     }
 
     private void FixedUpdate()
@@ -58,5 +68,10 @@ public class Level : MonoBehaviour
     {
         isDark = !isDark;
         player.SwitchLayer(isDark ? 9 : 8);
+    }
+
+    private void OnRocketTriggered()
+    {
+        Debug.Log("Level finished!");
     }
 }

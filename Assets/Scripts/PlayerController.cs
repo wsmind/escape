@@ -72,7 +72,11 @@ public class PlayerController : MonoBehaviour
         // activations
         var activatePressed = Input.GetButtonDown("Activate");
         if (currentAnimationZone && activatePressed)
+        {
             currentAnimationZone.Activate();
+            currentAnimationZone.Hide();
+            currentAnimationZone = null;
+        }
     }
 
     private void FixedUpdate()
