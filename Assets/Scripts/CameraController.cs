@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
 
     public Transform cameraContainer;
 
+    private int firstFrames = 5;
+
     private static readonly float fovY = Mathf.Deg2Rad * 20.0f;
     private static readonly float fovX = 16.0f / 9.0f * fovY;
 
@@ -38,6 +40,13 @@ public class CameraController : MonoBehaviour
 
         // smooth the movement over time
         var smoothPosition = Vector2.Lerp(new Vector2(cameraContainer.position.x, cameraContainer.position.y), target, Mathf.Min(Time.deltaTime * DampingFactor, 1.0f));
+
+        // discard smoothing only for the first frame, to avoid seeing unwanted level parts
+        if (firstFrames > 0)
+        {
+            firstFrames--;
+            smoothPosition = target;
+        }
 
         cameraContainer.position = new Vector3(smoothPosition.x, smoothPosition.y, -Distance);
     }
