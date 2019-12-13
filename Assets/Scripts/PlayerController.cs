@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody;
     public FeetCollider FeetCollider;
 
+    public Transform SpriteParent;
     public Transform FrameContainer;
 
     public AudioSource walkAudio;
@@ -62,10 +63,10 @@ public class PlayerController : MonoBehaviour
 
         // flip with direction
         if (Mathf.Abs(rigidBody.velocity.x) > 0.2)
-            FrameContainer.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
+            SpriteParent.localScale = new Vector3(rigidBody.velocity.x >= 0.0f ? 1.0f : -1.0f, 1.0f, 1.0f);
 
         // damped point of interested (for camera targeting)
-        var targetPoi = new Vector2(FrameContainer.localScale.x * 6.0f + 0.5f, 1.5f);
+        var targetPoi = new Vector2(SpriteParent.localScale.x * 6.0f + 0.5f, 1.5f);
         PointOfInterest = Vector2.Lerp(PointOfInterest, targetPoi, Mathf.Min(Time.deltaTime * 0.5f, 1.0f));
 
         // activations
