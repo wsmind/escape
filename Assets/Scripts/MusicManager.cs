@@ -12,7 +12,7 @@ public class MusicManager : MonoBehaviour
         // we need only one
         if (Instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

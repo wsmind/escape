@@ -22,6 +22,7 @@
 
             uniform float4 CameraScaleBias;
             uniform float GlobalDarkness;
+            uniform float Fade;
 
             struct appdata
             {
@@ -80,7 +81,7 @@
                 fixed3 borderColor = fixed3(1.0, 0.4, 0.0);
 
                 float borderMask = smoothstep(0.0, 0.2, interpolator) * smoothstep(1.0, 0.8, interpolator);
-                color = saturate(color + borderColor * borderMask);
+                color = saturate(color + borderColor * borderMask) * Fade;
 
                 return fixed4(color, 1.0);
             }

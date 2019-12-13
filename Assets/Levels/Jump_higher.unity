@@ -816,6 +816,11 @@ PrefabInstance:
       propertyPath: Bounds.height
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 41396335840573437, guid: d662c1fee3098fd469f31b36a86e85d5,
+        type: 3}
+      propertyPath: NextLevel
+      value: Outro
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d662c1fee3098fd469f31b36a86e85d5, type: 3}
 --- !u!1001 &357520769
