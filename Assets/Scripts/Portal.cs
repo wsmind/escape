@@ -6,6 +6,8 @@ public class Portal : MonoBehaviour
 
     public ParticleSystem BurstFx;
 
+    public AudioSource Sfx;
+
     public delegate void OnPortalTriggeredHandler();
     public event OnPortalTriggeredHandler OnPortalTriggered;
 
@@ -22,6 +24,7 @@ public class Portal : MonoBehaviour
     private void OnActivated()
     {
         BurstFx.Play();
+        Sfx.Play();
         OnPortalTriggered?.Invoke();
     }
 }
