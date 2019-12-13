@@ -9,8 +9,16 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        DontDestroyOnLoad(this);
+        // we need only one
+        if (Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
     public void SetGlobalDarkness(float globalDarkness)
