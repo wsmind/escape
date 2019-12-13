@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8662250172376746685}
   - component: {fileID: 1522804613682876210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ActivationFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2335618597095429534}
   - component: {fileID: 815546909932282742}
   - component: {fileID: 3801903927269510566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ActivationZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
