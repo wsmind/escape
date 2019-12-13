@@ -5,6 +5,9 @@ public class ActivationZone : MonoBehaviour
     public delegate void OnActivatedHandler();
     public event OnActivatedHandler OnActivated;
 
+    public delegate bool OnActivationCheckHandler(PlayerController player);
+    public OnActivationCheckHandler OnActivationCheck;
+
     public SpriteRenderer ActivationFeedback;
     public float FeedbackSpeed = 4.0f;
 
@@ -24,6 +27,14 @@ public class ActivationZone : MonoBehaviour
     public void Hide()
     {
         feedbackVisible = false;
+    }
+
+    public bool CanActivate(PlayerController player)
+    {
+        if (OnActivationCheck != null)
+            return OnActivationCheck(player);
+
+        return true;
     }
 
     private void Update()

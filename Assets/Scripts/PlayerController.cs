@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var activationZone = other.GetComponent<ActivationZone>();
-        if (activationZone && !currentAnimationZone)
+        if (activationZone && !currentAnimationZone && activationZone.CanActivate(this))
         {
             currentAnimationZone = activationZone;
             activationZone.Show();
