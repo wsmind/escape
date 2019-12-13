@@ -76,6 +76,9 @@ public class PlayerController : MonoBehaviour
             currentAnimationZone.Activate();
             currentAnimationZone.Hide();
             currentAnimationZone = null;
+
+            jumpAudio.pitch = UnityEngine.Random.value * 0.2f + 1.5f;
+            jumpAudio.Play();
         }
     }
 
@@ -97,7 +100,8 @@ public class PlayerController : MonoBehaviour
         {
             jumping = true;
             velocity.y = JumpVelocity;
-            jumpAudio.pitch = UnityEngine.Random.value * 0.2f + 1.5f;
+
+            jumpAudio.pitch = UnityEngine.Random.value * 0.2f + 2.1f;
             jumpAudio.Play();
         }
         else if (!jumpPressed)
