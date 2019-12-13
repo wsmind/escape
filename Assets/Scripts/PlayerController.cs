@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource walkAudio;
     public AudioSource jumpAudio;
+
+    public GameObject[] PotionContainers;
+    public bool HasPotion { get; private set; } = false;
 
     public Vector2 PointOfInterest { get; private set; }
 
@@ -49,7 +53,7 @@ public class PlayerController : MonoBehaviour
             {
                 FrameContainer.GetChild(currentFrame).gameObject.SetActive(false);
                 FrameContainer.GetChild(nextFrame).gameObject.SetActive(true);
-                walkAudio.pitch = Random.value * 0.3f + 4.0f;
+                walkAudio.pitch = UnityEngine.Random.value * 0.3f + 4.0f;
                 walkAudio.Play();
             }
 
@@ -88,7 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             jumping = true;
             velocity.y = JumpVelocity;
-            jumpAudio.pitch = Random.value * 0.2f + 1.5f;
+            jumpAudio.pitch = UnityEngine.Random.value * 0.2f + 1.5f;
             jumpAudio.Play();
         }
         else if (!jumpPressed)
@@ -117,7 +121,18 @@ public class PlayerController : MonoBehaviour
             velocity.y = bumper.BumpVelocity;
             rigidBody.velocity = velocity;
 
-            jumpAudio.pitch = Random.value * 0.2f + 0.8f;
+            jumpAudio.pitch = UnityEngine.Random.value * 0.2f + 0.8f;
+            jumpAudio.Play();
+        }
+
+        var potion = other.GetComponent<Potion>();
+        if (potion != null)
+        {
+            HasPotion = true;
+            potion.Take();
+            Array.ForEach(PotionContainers, obj => obj.SetActive(true));
+
+            jumpAudio.pitch = UnityEngine.Random.value * 0.2f + 3.8f;
             jumpAudio.Play();
         }
     }
