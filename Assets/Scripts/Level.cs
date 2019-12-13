@@ -54,6 +54,8 @@ public class Level : MonoBehaviour
         var targetDarkness = isDark ? 1.0f : 0.0f;
         globalDarkness = Mathf.Lerp(globalDarkness, targetDarkness, Mathf.Min(1.2f * Time.deltaTime, 1.0f));
 
+        MusicManager.Instance.SetGlobalDarkness(globalDarkness);
+
         //const float power = 4.0f;
         float shaderDarkness = globalDarkness;// * globalDarkness;
         /*if (isDark)
